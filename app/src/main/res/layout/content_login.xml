@@ -48,7 +48,8 @@
             android:layout_height="24dp"
             android:id="@+id/txtPwd"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.10" />
+            android:layout_weight="0.10"
+            android:password="true" />
 
         <Button
             android:layout_width="wrap_content"
