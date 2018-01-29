@@ -1,4 +1,4 @@
-package com.example.blandinf.channelmessaging;
+package com.example.blandinf.channelmessaging.activites;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +15,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blandinf.channelmessaging.response.AuthenticationResponse;
+import com.example.blandinf.channelmessaging.ws.HttpPostHandler;
+import com.example.blandinf.channelmessaging.ws.OnDownloadListener;
+import com.example.blandinf.channelmessaging.ws.PostRequest;
+import com.example.blandinf.channelmessaging.R;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -65,8 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                         if(login.getResponse().equals("Ok")) {
                             Intent intent = new Intent(getApplicationContext(), ChannelListActivity.class);
                             startActivity(intent);
-                        }
-                        else
+                        } else
                             Toast.makeText(getBaseContext(),"Error", Toast.LENGTH_SHORT).show();
                     }
 

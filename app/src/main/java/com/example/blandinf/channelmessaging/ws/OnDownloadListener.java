@@ -1,4 +1,4 @@
-package com.example.blandinf.channelmessaging;
+package com.example.blandinf.channelmessaging.ws;
 
 /**
  * Created by blandinf on 19/01/2018.

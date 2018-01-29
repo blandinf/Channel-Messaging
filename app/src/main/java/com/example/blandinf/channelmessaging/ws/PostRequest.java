@@ -1,4 +1,4 @@
-package com.example.blandinf.channelmessaging;
+package com.example.blandinf.channelmessaging.ws;
 
 import java.util.HashMap;
 

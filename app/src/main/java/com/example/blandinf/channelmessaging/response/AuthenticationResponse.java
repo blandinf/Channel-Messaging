@@ -1,4 +1,4 @@
-package com.example.blandinf.channelmessaging;
+package com.example.blandinf.channelmessaging.response;
 
 /**
  * Created by blandinf on 22/01/2018.
