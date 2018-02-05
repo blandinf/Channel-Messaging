@@ -28,7 +28,7 @@ import java.util.HashMap;
  */
 public class ChannelListActivity extends Activity implements AdapterView.OnItemClickListener {
 
-    private static final String TAG = ChannelListActivity.class.getSimpleName();
+    private static final String TAG = "MyTag";
     private Gson gson = new Gson();
     public static final String PREFS_NAME = "MyPrefsFile";
     private ListView _listView;
