@@ -1,7 +1,9 @@
 package com.example.blandinf.channelmessaging.activites;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +19,8 @@ import android.widget.Toast;
 import com.example.blandinf.channelmessaging.R;
 import com.example.blandinf.channelmessaging.adapter.MyArrayAdapter;
 import com.example.blandinf.channelmessaging.adapter.MyMessageAdapter;
+import com.example.blandinf.channelmessaging.databases.FriendsDB;
+import com.example.blandinf.channelmessaging.databases.UserDataSource;
 import com.example.blandinf.channelmessaging.model.Message;
 import com.example.blandinf.channelmessaging.response.ChannelReponse;
 import com.example.blandinf.channelmessaging.response.MessagesResponse;
@@ -42,6 +46,7 @@ public class ChannelActivityMessages extends Activity{
     private ListView _messages;
     private TextView _message_content;
     private Button _send_button;
+    private UserDataSource userDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,26 @@ public class ChannelActivityMessages extends Activity{
                 Runnable r = new Runnable() {
                     public void run() {
                         _messages.setAdapter(new MyMessageAdapter(getApplicationContext(),response.getMessages()));
+                        _messages.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                builder.setMessage("Voulez-vous vraiment ajouter cet utilisateur à votre liste d'amis?").setTitle("Ajouter un ami");
+
+                                builder.setPositiveButton("Accepter", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        userDataSource.insertUser("test","test");
+                                    }
+                                });
+                                builder.setNegativeButton("Refuser", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                    }
+                                });
+
+                                builder.create();
+                            }
+                        });
                     }
                 };
                 handler.postDelayed(r, 1000);
