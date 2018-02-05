@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.blandinf.channelmessaging.model.Channel;
+import com.example.blandinf.channelmessaging.model.Message;
 import com.example.blandinf.channelmessaging.response.ChannelReponse;
 import com.example.blandinf.channelmessaging.ws.HttpPostHandler;
 import com.example.blandinf.channelmessaging.adapter.MyArrayAdapter;
@@ -66,6 +67,7 @@ public class ChannelListActivity extends Activity implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplicationContext(), ChannelActivityMessages.class);
+        intent.putExtra("channelid",1);
         startActivity(intent);
     }
 }
