@@ -67,7 +67,7 @@ public class ChannelListActivity extends Activity implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplicationContext(), ChannelActivityMessages.class);
-        intent.putExtra("channelid",1);
+        intent.putExtra("channelid",position);
         startActivity(intent);
     }
 }
