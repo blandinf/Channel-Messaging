@@ -15,6 +15,24 @@
         android:textStyle="bold"
         android:theme="@style/AppTheme" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_gravity="center_horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="61dp"
+            android:text="Friends"
+            android:id="@+id/friends_button"
+            android:layout_weight="0.15"
+            android:gravity="center"
+            android:enabled="true"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
