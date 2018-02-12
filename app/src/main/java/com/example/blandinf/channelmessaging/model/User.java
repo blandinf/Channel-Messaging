@@ -35,7 +35,7 @@ public class User {
         this.imageURL = imageURL;
     }
 
-    public User(UUID userID, String username, String imageURL) {
+    public User() {
         this.userID = userID;
         this.username = username;
         this.imageURL = imageURL;

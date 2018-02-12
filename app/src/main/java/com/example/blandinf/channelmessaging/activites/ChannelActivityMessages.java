@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.example.blandinf.channelmessaging.adapter.MyMessageAdapter;
 import com.example.blandinf.channelmessaging.databases.FriendsDB;
 import com.example.blandinf.channelmessaging.databases.UserDataSource;
 import com.example.blandinf.channelmessaging.model.Message;
+import com.example.blandinf.channelmessaging.model.User;
 import com.example.blandinf.channelmessaging.response.ChannelReponse;
 import com.example.blandinf.channelmessaging.response.MessagesResponse;
 import com.example.blandinf.channelmessaging.ws.HttpPostHandler;
@@ -57,6 +59,8 @@ public class ChannelActivityMessages extends Activity{
         _send_button = (Button) findViewById(R.id.send);
         _message_content = (TextView) findViewById(R.id.message_content);
 
+        userDataSource = new UserDataSource(getApplicationContext());
+
         HashMap<String, String> hm = new HashMap<String, String>();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("access",null);
@@ -69,32 +73,41 @@ public class ChannelActivityMessages extends Activity{
         httpPostHandler.addOnDownloadListener(new OnDownloadListener() {
             @Override
             public void onDownloadComplete(String downloadedContent) {
-                Toast.makeText(getBaseContext(), downloadedContent, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), downloadedContent, Toast.LENGTH_SHORT).show();
                 final MessagesResponse response = gson.fromJson(downloadedContent, MessagesResponse.class);
                 handler = new Handler();
                 Runnable r = new Runnable() {
                     public void run() {
                         _messages.setAdapter(new MyMessageAdapter(getApplicationContext(),response.getMessages()));
-                        _messages.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View v) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                                builder.setMessage("Voulez-vous vraiment ajouter cet utilisateur à votre liste d'amis?").setTitle("Ajouter un ami");
+                        _messages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                                    String item = _messages.getItemAtPosition(position).toString();
+                                    final String username = response.getMessages().get(position).getUsername();
+                                    Toast.makeText(getApplicationContext(),"You selected : " + item,Toast.LENGTH_SHORT).show();
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(ChannelActivityMessages.this);
+                                    builder.setMessage("Voulez-vous vraiment ajouter " + username + " à votre liste d'amis?").setTitle("Ajouter un ami");
 
-                                builder.setPositiveButton("Accepter", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        userDataSource.insertUser("test","test");
-                                    }
-                                });
-                                builder.setNegativeButton("Refuser", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
+                                    builder.setPositiveButton("Accepter", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            if(username != "fblan") {
+                                                Toast.makeText(getApplicationContext(), "Utilisateur ajouté", Toast.LENGTH_LONG).show();
+                                                userDataSource.open();
+                                                userDataSource.insertUser(username, "imageURL");
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "Action impossible", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                    builder.setNegativeButton("Refuser", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
 
-                                    }
-                                });
-
-                                builder.create();
-                            }
-                        });
+                                        }
+                                    });
+                                    AlertDialog alert11 = builder.create();
+                                    alert11.show();
+                                }
+                            });
                     }
                 };
                 handler.postDelayed(r, 1000);
@@ -135,6 +148,5 @@ public class ChannelActivityMessages extends Activity{
                 httpPostHandler.execute(postRequest);
             }
         });
-
     }
 }

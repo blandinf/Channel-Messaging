@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,11 +33,21 @@ public class ChannelListActivity extends Activity implements AdapterView.OnItemC
     private Gson gson = new Gson();
     public static final String PREFS_NAME = "MyPrefsFile";
     private ListView _listView;
+    private Button _friends_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.channel_list_activity);
+
+        _friends_button = (Button) findViewById(R.id.friends_button);
+        _friends_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),FriendsListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         HashMap<String, String> hm = new HashMap<String, String>();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);

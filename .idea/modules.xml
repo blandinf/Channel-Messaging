@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChannelMessaging.iml" filepath="$PROJECT_DIR$/ChannelMessaging.iml" />
       <module fileurl="file://$PROJECT_DIR$/Connexion_Form.iml" filepath="$PROJECT_DIR$/Connexion_Form.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Connexion_Form.iml" filepath="$PROJECT_DIR$/Connexion_Form.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Connexion_Form.iml" filepath="$PROJECT_DIR$/Connexion_Form.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
