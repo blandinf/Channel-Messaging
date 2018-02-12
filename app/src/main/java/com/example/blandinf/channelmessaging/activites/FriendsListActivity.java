@@ -25,9 +25,6 @@ import java.util.List;
  */
 public class FriendsListActivity extends Activity{
 
-    private SQLiteOpenHelper onHelper;
-    private SQLiteDatabase db;
-    private Cursor cursor;
     private GridView _gridView;
     private List<User> users;
     private UserDataSource userDataSource;
@@ -45,6 +42,5 @@ public class FriendsListActivity extends Activity{
         users = userDataSource.getAllUsers();
 
         _gridView.setAdapter(new MyFriendsListAdapter(getApplicationContext(),(ArrayList) users));
-
-            }
+    }
 }
