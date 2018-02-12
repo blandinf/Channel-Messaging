@@ -33,9 +33,9 @@ public class UserDataSource {
     public void insertUser(String username, String imageURL) {
         UUID newID = UUID.randomUUID();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(FriendsDB.KEY_USER_ID, newID.toString());
         contentValues.put(FriendsDB.KEY_USERNAME,username);
         contentValues.put(FriendsDB.KEY_IMAGE_URL,imageURL);
-        contentValues.put(FriendsDB.KEY_USER_ID, newID.toString());
-        database.insert(FriendsDB.FRIENDS_TABLE_NAME,null,contentValues);
+        database.insert(FriendsDB.FRIENDS_TABLE_NAME,"",contentValues);
     }
 }
