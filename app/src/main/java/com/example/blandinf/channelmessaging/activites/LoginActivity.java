@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("access", login.getAccesstoken());
                         editor.commit();
                         if(login.getResponse().equals("Ok")) {
-                            Intent intent = new Intent(getApplicationContext(), ChannelListActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else
                             Toast.makeText(getBaseContext(),"Error", Toast.LENGTH_SHORT).show();
