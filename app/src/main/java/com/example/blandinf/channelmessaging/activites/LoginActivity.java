@@ -1,5 +1,6 @@
 package com.example.blandinf.channelmessaging.activites;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("access", login.getAccesstoken());
                         editor.commit();
                         if(login.getResponse().equals("Ok")) {
+                            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                            String device_token = sharedPref.getString("device_token",null);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else

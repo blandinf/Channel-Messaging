@@ -20,6 +20,7 @@ public class FragmentA extends Fragment {
         View v = inflater.inflate(R.layout.fragment_a,container);
         return v;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
