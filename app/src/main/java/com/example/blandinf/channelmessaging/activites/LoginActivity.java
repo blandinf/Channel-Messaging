@@ -54,67 +54,34 @@ public class LoginActivity extends AppCompatActivity {
         validateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String,String> hm = new HashMap<String, String>();
-                hm.put("username",txtId.getText().toString());
-                hm.put("password",txtPassword.getText().toString());
+                HashMap<String, String> hm = new HashMap<String, String>();
+                hm.put("username", txtId.getText().toString());
+                hm.put("password", txtPassword.getText().toString());
                 PostRequest postRequest = new PostRequest("http://www.raphaelbischof.fr/messaging/?function=connect", hm);
                 HttpPostHandler httpPostHandler = new HttpPostHandler();
                 httpPostHandler.addOnDownloadListener(new OnDownloadListener() {
                     @Override
                     public void onDownloadComplete(String downloadedContent) {
-                        Toast.makeText(getBaseContext(),downloadedContent, Toast.LENGTH_SHORT).show();
-                        AuthenticationResponse login = gson.fromJson(downloadedContent,AuthenticationResponse.class);
+                        Toast.makeText(getBaseContext(), downloadedContent, Toast.LENGTH_SHORT).show();
+                        AuthenticationResponse login = gson.fromJson(downloadedContent, AuthenticationResponse.class);
                         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString("access", login.getAccesstoken());
                         editor.commit();
-                        if(login.getResponse().equals("Ok")) {
-                            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                            String device_token = sharedPref.getString("device_token",null);
+                        if (login.getResponse().equals("Ok")) {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else
-                            Toast.makeText(getBaseContext(),"Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onDownloadError(String error) {
-                        Toast.makeText(getBaseContext(),error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), error, Toast.LENGTH_SHORT).show();
                     }
                 });
                 httpPostHandler.execute(postRequest);
             }
         });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

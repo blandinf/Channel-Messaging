@@ -41,4 +41,10 @@ public class MyArrayAdapter extends ArrayAdapter<Channel>{
 
         return rowView;
     }
+
+    @Override
+    public long getItemId(int position) {
+        Channel channel = channels.get(position);
+        return channel.getChannelID();
+    }
 }

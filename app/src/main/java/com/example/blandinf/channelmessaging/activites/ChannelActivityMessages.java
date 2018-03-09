@@ -120,7 +120,7 @@ public class ChannelActivityMessages extends Activity{
         });
         httpPostHandler.execute(postRequest);
 
-        _send_button.setOnClickListener(new View.OnClickListener(){
+       /* _send_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 HashMap<String, String> hm = new HashMap<String, String>();
@@ -147,6 +147,6 @@ public class ChannelActivityMessages extends Activity{
                 });
                 httpPostHandler.execute(postRequest);
             }
-        });
+        });*/
     }
 }

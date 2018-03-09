@@ -1,15 +1,10 @@
 package com.example.blandinf.channelmessaging.activites;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,9 +16,8 @@ import android.widget.Toast;
 import com.example.blandinf.channelmessaging.R;
 import com.example.blandinf.channelmessaging.adapter.MyArrayAdapter;
 import com.example.blandinf.channelmessaging.adapter.MyMessageAdapter;
-import com.example.blandinf.channelmessaging.databases.UserDataSource;
-import com.example.blandinf.channelmessaging.fragments.FragmentA;
-import com.example.blandinf.channelmessaging.fragments.FragmentB;
+import com.example.blandinf.channelmessaging.fragments.ChannelListFragment;
+import com.example.blandinf.channelmessaging.fragments.MessageFragment;
 import com.example.blandinf.channelmessaging.response.ChannelReponse;
 import com.example.blandinf.channelmessaging.response.MessagesResponse;
 import com.example.blandinf.channelmessaging.ws.HttpPostHandler;
@@ -52,26 +46,19 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.channel_list_fragments);
+        setContentView(R.layout.main_activity);
 
-        _friends_button = (Button) findViewById(R.id.friends_button);
-        _friends_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),FriendsListActivity.class);
-                startActivity(intent);
-            }
-        });
+        //_friends_button = (Button) findViewById(R.id.friends_button);
 
-        _messages = (ListView) findViewById(R.id.messages);
-        _send_button = (Button) findViewById(R.id.send);
-        _message_content = (TextView) findViewById(R.id.message_content);
+        //_messages = (ListView) findViewById(R.id.messages);
+        //_send_button = (Button) findViewById(R.id.send);
+        //_message_content = (TextView) findViewById(R.id.message_content);
 
-        getChannels();
+        //getChannels();
 
     }
 
-    public void getChannels(){
+    /*public void getChannels(){
 
         HashMap<String, String> hm = new HashMap<String, String>();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
@@ -91,8 +78,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 _listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        FragmentA fragA = (FragmentA)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
-                        FragmentB fragB = (FragmentB)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
+                        ChannelListFragment fragA = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
+                        MessageFragment fragB = (MessageFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
                         if(fragB == null|| !fragB.isInLayout()){
                             Intent i = new Intent(getApplicationContext(),ChannelActivityMessages.class);
                             startActivity(i);
@@ -109,9 +96,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             }
         });
         httpPostHandler.execute(postRequest);
-    }
+    }*/
 
-    public void getMessages(){
+    /*public void getMessages(){
         HashMap<String, String> hm = new HashMap<String, String>();
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         String token = settings.getString("access",null);
@@ -135,10 +122,22 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
             }
         });
         httpPostHandler.execute(postRequest);
-        }
+        }*/
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        ChannelListFragment channelListFragment = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.ChannelListFragment);
+        MessageFragment messageFragment = (MessageFragment) getSupportFragmentManager().findFragmentById(R.id.MessageFragment);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putLong("channelid",id);
+        editor.commit();
+        if(messageFragment == null || !messageFragment.isInLayout()){
+            Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getApplicationContext(),this.getClass());
+            startActivity(intent);
+        }
     }
 }
