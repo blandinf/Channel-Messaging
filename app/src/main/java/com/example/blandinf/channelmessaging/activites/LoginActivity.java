@@ -27,10 +27,8 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView id;
-    private TextView password;
-    private EditText txtId;
-    private EditText txtPassword;
+    private EditText mail;
+    private EditText password;
     private Button validateBtn;
     private Gson gson = new Gson();
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -41,22 +39,20 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.content_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        id = (TextView) findViewById(R.id.identifiant);
-        password = (TextView) findViewById(R.id.password);
-        txtId = (EditText) findViewById(R.id.txtId);
-        txtPassword = (EditText) findViewById(R.id.txtPwd);
+        mail = (EditText) findViewById(R.id.mail);
+        password = (EditText) findViewById(R.id.password);
         validateBtn = (Button) findViewById(R.id.validate);
 
         validateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HashMap<String, String> hm = new HashMap<String, String>();
-                hm.put("username", txtId.getText().toString());
-                hm.put("password", txtPassword.getText().toString());
+                hm.put("username", mail.getText().toString());
+                hm.put("password", password.getText().toString());
                 PostRequest postRequest = new PostRequest("http://www.raphaelbischof.fr/messaging/?function=connect", hm);
                 HttpPostHandler httpPostHandler = new HttpPostHandler();
                 httpPostHandler.addOnDownloadListener(new OnDownloadListener() {
