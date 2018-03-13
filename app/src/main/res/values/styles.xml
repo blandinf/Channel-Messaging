@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@android:transition/slide_top</item>
+        <item name="android:windowExitTransition">@android:transition/explode</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -17,14 +22,21 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <style name="TextLabel" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- Hint color et label color si pas de focus -->
         <item name="android:textColorHint">@color/gray</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
         <!-- bar color -->
         <item name="colorControlNormal">@color/colorPrimaryDark</item>
         <!-- Label color si focus -->
-        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <!-- enable window content transitions -->
+        <item name="android:windowActivityTransitions">true</item>
+
+        <!-- specify shared element transitions -->
+        <item name="android:windowSharedElementEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowSharedElementExitTransition">@transition/change_image_transform</item>
+
     </style>
 
 </resources>

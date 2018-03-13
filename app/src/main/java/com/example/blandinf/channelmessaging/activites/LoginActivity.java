@@ -1,5 +1,6 @@
 package com.example.blandinf.channelmessaging.activites;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blandinf.channelmessaging.fragments.ChannelListFragment;
 import com.example.blandinf.channelmessaging.response.AuthenticationResponse;
 import com.example.blandinf.channelmessaging.ws.HttpPostHandler;
 import com.example.blandinf.channelmessaging.ws.OnDownloadListener;
@@ -29,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText mail;
     private EditText password;
+    private ImageView mIvLogo;
     private Button validateBtn;
     private Gson gson = new Gson();
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -46,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         mail = (EditText) findViewById(R.id.mail);
         password = (EditText) findViewById(R.id.password);
         validateBtn = (Button) findViewById(R.id.validate);
+        mIvLogo = (ImageView) findViewById(R.id.mIvLogo);
 
         validateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                         editor.putString("access", login.getAccesstoken());
                         editor.commit();
                         if (login.getResponse().equals("Ok")) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
+                            Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(loginIntent, ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, mIvLogo, "logo").toBundle());
                         } else
                             Toast.makeText(getBaseContext(), "Error", Toast.LENGTH_SHORT).show();
                     }

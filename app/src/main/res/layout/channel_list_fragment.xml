@@ -4,38 +4,32 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:src="@drawable/channel_messaging_logo"
+        android:layout_gravity="center"
+        android:transitionName="logo"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_marginTop="20dp"
+        android:id="@+id/mIvLogo"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Liste des Channels"
-        android:id="@+id/title"
-        android:layout_gravity="center_horizontal"
-        android:textStyle="bold"
-        android:theme="@style/AppTheme" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="74dp"
-        android:layout_gravity="center_horizontal"
-        android:weightSum="1">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="61dp"
+    <Button
+            android:layout_width="80dp"
+            android:layout_height="70dp"
             android:text="Friends"
+            android:textSize="12dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/friends_button"
             android:layout_weight="0.15"
             android:gravity="center"
             android:enabled="true"
-            android:layout_gravity="bottom" />
-    </LinearLayout>
+            android:layout_gravity="center" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listView"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="20dp" />
+
 </LinearLayout>
